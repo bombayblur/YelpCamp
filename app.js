@@ -30,6 +30,11 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.locals.moment = moment;
 
+mongoose.set('useNewUrlParser',true);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false); //for findbyidandupdate
+mongoose.connect(process.env.DB_KEY);
+
 
 app.use(expressSession({ //cookie id generation
     secret: 'hashtables',
@@ -46,10 +51,7 @@ passport.use(new passportLocalStrategy(user.authenticate()));
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 
-mongoose.set('useNewUrlParser',true);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useFindAndModify', false); //for findbyidandupdate
-mongoose.connect('mongodb://localhost/yelpdb');
+
 
 app.use(async (req,res,next)=>{
     res.locals.currentUser = req.user;
