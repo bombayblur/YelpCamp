@@ -1,0 +1,128 @@
+.star{
+    font-size:12px;
+    color: goldenrod;
+}
+
+.star-main{
+    font-size:20px;
+    color: goldenrod;
+    margin-top:0px;
+    padding:0px;
+    /* display:inline-block; */
+    vertical-align: -10%;
+
+
+}
+
+
+.oi.person{
+    font-size:12px;
+}
+
+.comment-body{
+    font-size:22px;
+    padding-top: 5px;
+    display:block;
+}
+
+.post-date{
+    font-size:13px;
+    color: darkgrey
+}
+
+.show-brand{
+    font-size:30px;
+    text-align: center;
+}
+
+#login-form{
+    width:50%; 
+    border:1px solid #BEBEBE;
+    border-radius: 5px;
+    padding:10px;
+    margin:20px;
+    background-color: #F0F0F0;
+}
+
+#globalFooter{
+    font-size:17px;
+    margin-top:600px;
+    padding:10px;
+    height:50px;
+    
+    display: block;
+    width:100%;
+    
+    text-align: center;
+    background-color:rgba(255, 255, 255, 0.1)
+        
+}
+
+#price-tag{
+    font-size: 1rem;
+}
+
+
+/****** Style Star Rating Widget *****/
+
+fieldset { 
+    margin-bottom: 40px;
+    padding: 0;
+}
+
+.rating { 
+  /* border: none;  */
+  float: left;
+  margin:0px;
+  padding:0px;
+
+}
+
+.rating > input { display: none; } 
+
+.rating > label:before { 
+  margin-left: 5px;
+  margin-right: 2px;
+  font-size: 1.4em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+/****** Style Star Rating Widget End *****/
+
+
+
+
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top:20px;
+}
+
+.input-card{
+    max-width:50%
+}

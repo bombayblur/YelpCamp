@@ -1,0 +1,125 @@
+<% include ./partials/header%>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<div class="container mt-3">
+<div class="row">
+<div class="input-card card p-4 bg-light mx-auto">
+        <h1 class = "text-center">Add a campground</h1>
+        <br>
+
+<form action="/campgrounds" method="POST">
+    <div class="form-group">
+    <input class="form-control mb-2" type="text" name="name" placeholder="Campground Name">
+    <input class="form-control mb-2" type="text" name="image" placeholder="Campground Image">
+    <input class="form-control mb-2" type="text" name="description" placeholder="Campground Description">
+    <input class="form-control mb-2" type="text" name="price" placeholder="price">
+    
+    <div class="input-group mb-2 p-0">
+        <div class="input-group-prepend mr-1" style="transform:scale(0.98,0.98)">
+                <span class="input-group-text" id="basic-addon1">Rating</span>
+        </div>
+        <fieldset class="rating form-control p-1">
+            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+            <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+            <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+            <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+            <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+            <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+        </fieldset>
+    </div>
+    <input class="form-control mb-2" type="text" name="location" placeholder="location" id="location-field">
+    
+    <!-- Suggest address div -->
+    <div class="alert alert-dark row mx-2" id="location-suggest" style="display:none;">
+        <div class="alert alert-dark m-2 col-8" id="location-suggest-text" role="alert">
+                
+        </div>
+        <button class="btn btn-dark col-3">Add</button>
+    </div>
+
+    <hr>
+    <input class="form-control btn btn-primary" type = "submit">
+    </div>
+</form>
+<div class="row">
+    <div class="mx-auto">
+          <a href="/campgrounds" class="btn btn-outline-secondary mt-1">Go Back</a>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+
+    var usrLocationInput = document.getElementById('location-field');
+    var suggDiv = document.getElementById('location-suggest');
+    var suggDivTxt = document.getElementById('location-suggest-text');
+
+    usrLocationInput.addEventListener('input',timeFilter);
+
+    let timeLastExec = 0;
+    timeLastExec = parseInt(timeLastExec);
+    function timeFilter(){
+
+        let timeNow = Date.now();
+        console.log(timeNow);
+        let lapsedtime = timeNow-timeLastExec;
+        console.log(lapsedtime);
+        if(lapsedtime >= 1000){
+            console.log('fired')
+            getLocSuggestions();
+            timeLastExec =Date.now()
+            
+        }
+        
+    }
+
+
+
+
+    function getLocSuggestions(){
+
+        if(usrLocationInput.value.length>10){
+
+            
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+        params:{
+          address:usrLocationInput.value,
+          key:'AIzaSyBrahJ3tc34wgs7D1ebGfRMqyPiYzWzh3Q'
+        }})
+        .then((response)=>{
+            console.log(response);
+            var placeId = response.data.results[0].place_id
+            var formattedAddress = response.data.results[0].formatted_address;
+            console.log(response);
+            suggDivTxt.innerHTML = formattedAddress;
+            suggDiv.style.display = "block";
+            
+         }).catch((error)=>console.log(error));
+
+
+
+
+        
+        
+
+
+
+
+
+    }
+
+    }
+
+
+
+
+</script>
+
+<% include ./partials/footer%>

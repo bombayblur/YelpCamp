@@ -1,0 +1,218 @@
+<% include partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 mt-3">
+            <p class="lead font-weight-bold show-brand">YelpCamp</p>
+            <ul class="list-group">
+                <li class="list-group-item">Item 1</li>
+                <li class="list-group-item">Item 1</li>
+                <li class="list-group-item">Item 1</li>
+            </ul>
+            <div id="map"></div>
+        </div>
+        <div class="col-md-9 mt-3">
+            <div class="card">
+                <img src="<%= campground.image %>" alt="" class="card-img-top">
+
+            
+                <div class="card-body">
+
+                    <!-- Content card right floater -->
+                    <div class="float-right">
+                            <span id="price-tag"class="badge badge-pill badge-primary float-right">$ <%= campground.price %></span>
+                                
+                                <!-- Edit menu for autthor only -->
+                                <% if(currentUser && campground.author.id == currentUser.id || currentUser && currentUser.isAdmin) { %>
+                                    <div class="dropdown">
+                                            <a class="btn btn-warning btn-sm dropdown-toggle float-right mt-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Edit
+                                            </a>
+                                        
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="/campgrounds/<%= campground._id%>/edit">Edit Campground</a>
+                                                    <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                                                        <button class="dropdown-item text-danger">Delete Campground</button>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                <% } %>
+
+                    </div>
+
+                    <!-- Card Content -->
+                    <h3 class="card-title d-inline-block mr-2"><%= campground.name %></h5>
+
+                        <span class="bg-light rounded" style="padding:5px; vertical-align:5%;">
+                                <span class="oi star-main mr-2" data-glyph="star" title="icon name" aria-hidden="true"></span> 
+                                <%= campground.rating %> <span class="text-muted">stars</span>
+                        </span>
+                
+                    <h6 class="card-subtitle mb-2 text-muted ">by - <strong><%= campground.author.username %></strong> </h6>
+                    <h6 class="card-subtitle mb-2 text-muted ">created- <strong><%= moment(campground.created).fromNow() %></strong> </h6>
+
+                    <p class="card-text"><%= campground.description %></p>
+                </div>
+            </div>
+            <!-- Comments Section -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h4 class="d-inline pt-2">Commments</h4>
+                    <a class="btn btn-sm btn-info float-right" href="/campgrounds/<%=campground._id%>/comments/new"> Add
+                        a comment</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <%campground.comments.forEach((comment)=>{%>
+                    <li class="list-group-item">
+                        <div class="float-right">
+                            <span class="post-date"><%=moment(comment.created).fromNow()%></span>
+                            <% if(currentUser && comment.author.id == currentUser.id || currentUser && currentUser.isAdmin) { %>
+                                
+                                <div class="dropdown" >
+                                    <a class="btn btn-warning btn-sm dropdown-toggle float-right mt-2" style="width:70%;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Edit
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item editComment" href="#s">Edit Comment Here</a>
+                                        <a class="dropdown-item" href="/campgrounds/<%= campground._id%>/comments/<%= comment._id%>/edit">Edit Comment</a>
+                                        <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+                                            <button class="dropdown-item text-danger">Delete Comment</button>
+                                        </form>                                                   
+                                    </div>
+                                </div>
+                                    <% } %>
+                        </div>
+                        
+                        <div class="bg-light p-1 rounded d-inline">
+                            <span class="oi person" data-glyph="person" title="icon name" aria-hidden="true"></span> 
+                            <span><%=comment.author.username%></span>
+                        </div>
+                        <div class="bg-light text-muted p-1 rounded ml-2 d-inline">
+                            <%= comment.rating %>
+                            <span class="oi star mr-2" data-glyph="star" title="icon name" aria-hidden="true"></span> 
+                        </div>
+
+                        <br>
+
+                        <span class="comment-body font-weight-bold"> <%=comment.body%></span>
+                        
+                        
+                        <!-- In Page Comment Edit Form -->
+                        <form class = "form-inline commentEditForm" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=PUT" method="POST" style="display:none;">
+                            <input class = "form-control commentEditField" type="text" name="comment[body]" value="<%=comment.body%>">
+                            <input type="hidden" class="hiddenRatingBox" value=<%=comment.rating%>>
+                            <select class="form-control" name="comment[rating]">
+                                    <option value="">Rating</option>
+                                    <option value="0.5">0.5 </option>
+                                    <option value="1">1</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="2">2</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="3">3</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="4">4</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="5">5</option>   
+                            </select> 
+                            <input class = "btn btn-sm btn-secondary" type="submit">
+                        </form>
+                        <!-- In Page Comment Edit Form Ends -->
+                            
+                    </li>
+                    <%})%>
+                </ul>
+                
+
+                <!-- Add a comment -->
+
+                <div class="card-footer text-muted">
+                    <form action="/campgrounds/<%=campground._id%>/comments" method="POST">
+                        <div class="form-row">
+                            <div class="col" >
+                                    <select class="form-control" name="comment[rating]">
+                                        <option value="">Rating</option>
+                                        <option value="0.5">0.5 </option>
+                                        <option value="1">1</option>
+                                        <option value="1.5">1.5</option>
+                                        <option value="2">2</option>
+                                        <option value="2.5">2.5</option>
+                                        <option value="3">3</option>
+                                        <option value="3.5">3.5</option>
+                                        <option value="4">4</option>
+                                        <option value="4.5">4.5</option>
+                                        <option value="5">5</option>
+                                    
+                                     </select> 
+                            </div>
+                            <div class="col-8" >
+                                <input type="text" class="form-control" name="comment[body]" placeholder="Comment">
+                            </div>
+                            <div class="col">
+                                <input type="submit" class="btn btn-primary form-control" placeholder="submit">
+                            </div>
+                </div></form></div></div></div></div></div>
+
+  
+                        
+                      
+<script>
+
+let editButton = Array.from(document.getElementsByClassName('editComment')); // note that this is an array
+    editButton.forEach(ebutn=>{
+        ebutn.addEventListener('click',editField)
+    });
+
+    
+function editField(e){
+    e.preventDefault();
+    
+    let liParent = e.target.parentElement.parentElement.parentElement.parentElement;
+    
+    let rating = liParent.querySelector('.hiddenRatingBox').value;
+    console.log('rating value'+rating)
+    let selectBox = liParent.querySelector('select')
+    let selectField = selectBox.querySelector('option[value="'+rating+'"]')
+    console.log(selectField)
+    selectField.selected = "true"
+    console.log(selectBox)
+
+    
+
+    let inputForm = liParent.querySelector('.commentEditForm');
+    inputForm.style.display = "block";
+
+    let commentBody = liParent.querySelector('.comment-body'); //existing comment
+    commentBody.style.display = "none" //existing comment is hiddent   
+}
+</script>
+<script>
+        function initMap() {
+          var lat = <%= campground.lat %>;
+          var lng = <%= campground.lng %>;
+          var center = {lat: lat, lng: lng };
+          var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 8,
+              center: center,
+              scrollwheel: false
+          });
+          var contentString = `
+            <strong><%= campground.name %><br />
+            <%= campground.location %></strong>
+            <p><%= campground.description %></p>
+          `
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          var marker = new google.maps.Marker({
+              position: center,
+              map: map
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+      </script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkEuktzJeJ5zaaXqlpIw4I02G5BkotfpU&callback=initMap"></script>
+
+
+<% include partials/footer %>

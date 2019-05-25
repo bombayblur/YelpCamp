@@ -1,0 +1,43 @@
+<% include partials/header%>
+<div class="container mt-3">
+<div class="row">
+<div class="card p-4 bg-light mx-auto" >
+        <h1 class = "text-center">Add a comment for <%=campground.name%></h1>
+        <br>
+
+<form action="/campgrounds/<%=campground._id%>/comments" method="POST">
+    <div class="form-group">
+    <input class="form-control mb-2 text-dark" type="text" name="comment[author]" disabled value="<%=currentUser.username%>">
+    <input class="form-control mb-2" type="text" name="comment[body]" placeholder="Comment">
+    <div class="input-group mb-2 p-0">
+            <div class="input-group-prepend mr-1" style="transform:scale(0.98,0.98)">
+                    <span class="input-group-text" id="basic-addon1">Rating</span>
+            </div>
+            <fieldset class="rating form-control p-1">
+                <input type="radio" id="star5" name="comment[rating]" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                <input type="radio" id="star4half" name="comment[rating]" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                <input type="radio" id="star4" name="comment[rating]" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                <input type="radio" id="star3half" name="comment[rating]" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                <input type="radio" id="star3" name="comment[rating]" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                <input type="radio" id="star2half" name="comment[rating]" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                <input type="radio" id="star2" name="comment[rating]" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                <input type="radio" id="star1half" name="comment[rating]" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                <input type="radio" id="star1" name="comment[rating]" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                <input type="radio" id="starhalf" name="comment[rating]" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+            </fieldset>
+        </div>
+    <hr>
+    <input class="form-control btn btn-primary" type = "submit">
+
+    </div>
+</form>
+<div class="row">
+    <div class="mx-auto">
+          <a href="/campgrounds/<%=campground._id%>" class="btn btn-outline-secondary mt-1">Go Back</a>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+<% include partials/footer%>

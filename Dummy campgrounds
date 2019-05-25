@@ -1,0 +1,24 @@
+// //Database Insertion
+//=======================
+// let campgroundsArray = [
+//     {name:"Smokey creek",image:"https://source.unsplash.com/400x300/?camping,tent,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Wet Marsk",image:"https://source.unsplash.com/500x350/?camping,river,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Dry Hill",image:"https://source.unsplash.com/400x300/?camping,stars,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Buffalo River",image:"https://source.unsplash.com/400x300/?camping,forest,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Fox Canal",image:"https://source.unsplash.com/400x300/?camping,snow,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Smokey creek",image:"https://source.unsplash.com/400x300/?camping,tent,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Wet Marsk",image:"https://source.unsplash.com/500x350/?camping,river,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Dry Hill",image:"https://source.unsplash.com/400x300/?camping,stars,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Buffalo River",image:"https://source.unsplash.com/400x300/?camping,forest,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+//     {name:"Fox Canal",image:"https://source.unsplash.com/400x300/?camping,snow,tent",description:"This camp sucks. I've been wiping my ass with leaves."},
+// ]
+
+// campground.insertMany(campgroundsArray,(err,result)=>{
+//     if(err){
+//         console.log('Something went wrong');
+//     } else {
+//         console.log(result);
+//     }
+// })
+// ============================
+//End of insertion

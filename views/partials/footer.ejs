@@ -1,0 +1,36 @@
+<div class = "text-dark font-weight-light bg-light text-center" id="globalFooter" >Trademark 2019</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script>
+
+    let footerPortal = document.getElementById('globalFooter');
+    let adminLink = document.createElement('a');
+    adminLink.href="./registerAdmin.html"
+    let adminLinkText = document.createTextNode('AdminLogin');
+    adminLink.appendChild(adminLinkText);
+    
+    adminLink.classList ="btn btn-sm btn-danger ml-5"
+
+    footerPortal.addEventListener('click',showAdminLogin);
+
+    function showAdminLogin(e){
+        if(e.altKey){
+            footerPortal.appendChild(adminLink);
+        }
+    }
+
+
+</script>
+
+
+
+
+
+<script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.26.5'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+</body>
+</html>
