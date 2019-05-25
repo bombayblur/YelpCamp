@@ -25,8 +25,8 @@
                         <img class = "img-fluid" src="<%= campground.image%>">
                         <div class="caption m-2">
                             <h4> <%= campground.name%> </h4>
-                            <p class = "font-weight-light"> <%= campground.description.substring(0, 100)%></p>
-                            <a class = "btn btn-sm btn-info" href="/campgrounds/<%=campground.id%>"> More info.. </a>
+                            <p class = "font-weight-light"> <%= campground.description.substring(0, 70)%>...</p>
+                            <a class = "btn btn-sm btn-info" href="/campgrounds/<%=campground.id%>"> More info</a>
                         </div>
                 </div>
                 
