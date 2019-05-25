@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
-let campground = require('./models/campground');
-let comment = require('./models/comment');
+let campground = require('../models/campground');
+let comment = require('../models/comment');
 
 let dummyCampGrounds = [
     {name:"Smokey creek",image:"https://source.unsplash.com/400x300/?camping",description:"This camp sucks. I've been wiping my ass with leaves."},

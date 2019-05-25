@@ -74,10 +74,10 @@ app.use(async (req,res,next)=>{
     next() //keep next() here if you're using async/await
 });
 
-// seed();
+// seed(); //WARNING
 
 app.use('/campgrounds',campgroundRoutes);
 app.use('/campgrounds/:id/comments',commentroutes);
 app.use(indexroutes);
 
-app.listen(process.env.PORT || 800,()=>console.log('server is running...800'));
+app.listen(process.env.PORT || 800,()=>console.log('server is running on '+ process.env.PORT));
