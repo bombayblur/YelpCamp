@@ -16,7 +16,7 @@ let campground = require("./models/campground"); //importing campground models a
 let comment = require('./models/comment');
 let profile = require('./models/profile');
 
-let seed = require('./seeds');
+let seed = require('./seed/seeds');
 
 let campgroundRoutes = require("./routes/campgrounds");
 let commentroutes = require("./routes/comments");
