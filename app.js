@@ -9,7 +9,7 @@ var methodOverride = require('method-override');
 var flash = require('connect-flash');
 var moment = require('moment');
 var dotenv = require('dotenv').config(); //enviornment variables are stored here
- //passing options to geocoder
+//passing options to geocoder
 
 let user = require('./models/user');
 let campground = require("./models/campground"); //importing campground models and schema
@@ -30,6 +30,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.locals.moment = moment;
 
+// - Mongoose Settings
 mongoose.set('useNewUrlParser',true);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false); //for findbyidandupdate
@@ -52,7 +53,7 @@ passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 
 
-
+// - Custom Middleware (current user and profile model)
 app.use(async (req,res,next)=>{
     res.locals.currentUser = req.user;
     
@@ -78,6 +79,7 @@ app.use(async (req,res,next)=>{
 
 // seed(); //WARNING
 
+// - Routes
 app.use('/campgrounds',campgroundRoutes);
 app.use('/campgrounds/:id/comments',commentroutes);
 app.use(indexroutes);

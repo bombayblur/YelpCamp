@@ -9,3 +9,29 @@ All new features will mandatorily have to be devloped on new branches.
 >All **branches** and their status should be listed here
 
 **master** : Master Branch
+
+>Mongo Command : mongod --config /usr/local/etc/mongod.conf --dbpath ~/Documents/MongoDatabase
+
+**git commands** (https://rogerdudler.github.io/git-guide/)
+
+git add <filename>
+git add *
+git commit -m "Commit message"
+
+** Working with remote repo **
+git push origin master
+git remote add origin <server>
+
+**Branching**
+git checkout branch feature_x
+git checkout master
+git branch -d deature_x (will delete a branch)
+git push origin <branch>
+
+**Update and Merge**
+git pull
+git merge <branch>
+git add 
+
+**logs**
+git log --graph --oneline --decorate --all
