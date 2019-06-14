@@ -30,9 +30,12 @@ git branch -d feature_x (will delete a branch)
 git push origin \<branch\>   
 
 >**Update and Merge**  
-git pull  
+git pull(In the simplest terms, git pull does a git fetch followed by a git merge)  
 git merge \<branch\>  
 git add  
 
 >**logs**  
 git log --graph --oneline --decorate --all  
+
+>**Heroku**
+
